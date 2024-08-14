@@ -2,6 +2,7 @@ package com.appsigel.crud_spring.service;
 
 import com.appsigel.crud_spring.dto.ClienteDTO;
 import com.appsigel.crud_spring.dto.mapper.ClienteMapper;
+import com.appsigel.crud_spring.model.Cliente;
 import com.appsigel.crud_spring.repository.ClienteRepository;
 import exception.RecordNotFoundException;
 import jakarta.validation.Valid;
@@ -44,8 +45,11 @@ public class ClienteService {
     public ClienteDTO update(@NotNull @Positive Long id, @Valid ClienteDTO clienteDTO ){
         return clienteRepository.findById(id)
                 .map(recordFound -> {
+                    Cliente cliente = clienteMapper.toEntity(clienteDTO);
                     recordFound.setNome(clienteDTO.nome());
                     recordFound.setTelefone(clienteDTO.telefone());
+                    recordFound.getOrdens().clear();
+                    cliente.getOrdens().forEach(recordFound.getOrdens()::add); 
                     return clienteMapper.toDTO(clienteRepository.save(recordFound));
                 }).orElseThrow(()-> new RecordNotFoundException(id));
     }

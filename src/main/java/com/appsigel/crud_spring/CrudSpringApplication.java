@@ -25,13 +25,20 @@ public class CrudSpringApplication {
 			c.setNome("Marcos Felipe Issa");
 			c.setTelefone("(51)993257923");
                         
-                        Ordem ordem = new Ordem();
-                        ordem.setMarca("Sony Vaio");
-                        ordem.setCliente(c);
+                        Ordem ordem1 = new Ordem();
+                        ordem1.setMarca("Sony Vaio");
+                        ordem1.setCliente(c);
                         
-                        c.getOrdens().add(ordem);
+                        c.getOrdens().add(ordem1);
+
+						Ordem ordem2 = new Ordem();
+                        ordem2.setMarca("CCE");
+                        ordem2.setCliente(c);
+                        
+                        c.getOrdens().add(ordem2);
                         
 			clienteRepository.save(c);
+			
 			
 		};
 	}
