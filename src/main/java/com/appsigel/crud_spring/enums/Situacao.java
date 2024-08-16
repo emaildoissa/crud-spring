@@ -1,10 +1,10 @@
 package com.appsigel.crud_spring.enums;
 
-public enum Status {
-    ATIVA("Ativa"), INATIVA("Inativa");
+public enum Situacao {
+    ABERTA("Aberta"), FECHADA("Fechada");
     private String value;
     
-    private Status( String value ){
+    private Situacao( String value ){
         this.value = value;
     }
     
@@ -16,7 +16,4 @@ public enum Status {
     public String toString() {
         return value;
     }
-    
-    
-    
 }

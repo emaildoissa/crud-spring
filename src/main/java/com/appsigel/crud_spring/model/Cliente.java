@@ -1,5 +1,4 @@
 package com.appsigel.crud_spring.model;
-
 import com.appsigel.crud_spring.enums.Status;
 import com.appsigel.crud_spring.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -20,13 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
 @Data
 @Entity
-@SQLDelete(sql = "UPDATE CLIENTES SET status = 'Inativo' Where id = ?")
-@Where(clause = "status = 'Ativo'")
+@SQLDelete(sql = "UPDATE ORDEM SET STATUS = 'Inativa' Where cliente_id = ?")
+//@Where(clause = "status = 'Aberta'")
+@SQLRestriction("status <> 'ATIVA'")
 @Table(name = "clientes")
 
 public class Cliente {
@@ -50,8 +50,8 @@ public class Cliente {
     @NotNull
     @Column(length = 10, nullable = false)
     @Convert(converter = StatusConverter.class)
-    private Status status = Status.ATIVO;
-    
+    private Status status = Status.ATIVA;
+
     @NotNull
     @NotEmpty
     @Valid

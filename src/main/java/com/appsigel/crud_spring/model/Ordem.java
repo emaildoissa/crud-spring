@@ -1,10 +1,12 @@
 package com.appsigel.crud_spring.model;
 
+
 import org.hibernate.validator.constraints.Length;
 
+import com.appsigel.crud_spring.enums.Situacao;
+import com.appsigel.crud_spring.enums.converters.SituacaoConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,6 +34,12 @@ public class Ordem {
     @Length(min = 1, max = 100)
     @Column(length = 100, nullable = false)
     private String marca;
+
+    @NotNull
+    @Column(length = 10, nullable = false)
+    @Convert(converter = SituacaoConverter.class)
+    private Situacao situacao = Situacao.ABERTA;
+
     //private String tipo;
     //private String acessorios;
     //private String defeito;

@@ -12,13 +12,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteMapper {
+
     public ClienteDTO toDTO (Cliente cliente){
         if( cliente == null ){
             return null;
         }
         List<OrdemDTO> ordens = cliente.getOrdens()
         .stream()
-        .map(ordem -> new OrdemDTO(ordem.getId(), ordem.getMarca()))
+        .map(ordem -> new OrdemDTO(ordem.getId(), ordem.getMarca(),ordem.getSituacao()))
         .collect(Collectors.toList());
 
         return new ClienteDTO(cliente.getId(), cliente.getNome(), cliente.getTelefone(),
@@ -40,6 +41,7 @@ public class ClienteMapper {
         List<Ordem> ordens= clienteDTO.ordens().stream().map(ordemDTO -> {
             var ordem = new Ordem();
             ordem.setMarca(ordemDTO.marca());
+            ordem.setSituacao(ordem.getSituacao());
             ordem.setCliente(cliente);
             return ordem;
         }).collect(Collectors.toList());

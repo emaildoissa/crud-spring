@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.appsigel.crud_spring.enums.Situacao;
 import com.appsigel.crud_spring.model.Cliente;
 import com.appsigel.crud_spring.model.Ordem;
 import com.appsigel.crud_spring.repository.ClienteRepository;
@@ -28,10 +29,11 @@ public class CrudSpringApplication {
                         Ordem ordem1 = new Ordem();
                         ordem1.setMarca("Sony Vaio");
                         ordem1.setCliente(c);
-                        
+                        ordem1.setSituacao(Situacao.ABERTA);
                         c.getOrdens().add(ordem1);
 
 						Ordem ordem2 = new Ordem();
+						ordem2.setSituacao(Situacao.ABERTA);
                         ordem2.setMarca("CCE");
                         ordem2.setCliente(c);
                         
