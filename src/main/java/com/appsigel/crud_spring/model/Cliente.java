@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Data
 @Entity
-@SQLDelete(sql = "UPDATE ORDEM SET STATUS = 'Inativa' Where cliente_id = ?")
+@SQLDelete(sql = "UPDATE CLIENTES SET STATUS = 'Inativa' Where id = ?")
 //@Where(clause = "status = 'Aberta'")
 @SQLRestriction("status <> 'ATIVA'")
 @Table(name = "clientes")

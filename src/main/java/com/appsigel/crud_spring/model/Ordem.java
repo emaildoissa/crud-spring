@@ -1,6 +1,8 @@
 package com.appsigel.crud_spring.model;
 
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
 import com.appsigel.crud_spring.enums.Situacao;
@@ -22,6 +24,9 @@ import lombok.Data;
 
 @Data
 @Entity
+@SQLDelete(sql = "UPDATE ORDEM SET SITUACAO = 'Inativa' Where id = ?")
+//@Where(clause = "status = 'Aberta'")
+@SQLRestriction("situacao <> 'ABERTA'")
 @Table(name = "ordem")
 
 public class Ordem {
@@ -36,6 +41,7 @@ public class Ordem {
     private String marca;
 
     @NotNull
+    
     @Column(length = 10, nullable = false)
     @Convert(converter = SituacaoConverter.class)
     private Situacao situacao = Situacao.ABERTA;

@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public record OrdemDTO(
     Long id,
     @NotNull @NotBlank  @Length(min = 1, max = 100) String marca,
-    @NotNull @NotBlank @ValueOfEnum(enumClass = Situacao.class) Situacao situacao
+    @NotNull @ValueOfEnum(enumClass = Situacao.class) Situacao situacao
    ) {
            
 }

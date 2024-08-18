@@ -1,7 +1,7 @@
 package com.appsigel.crud_spring.enums;
 
 public enum Situacao {
-    ABERTA("Aberta"), FECHADA("Fechada");
+    ABERTA("Aberta"), FECHADA("Fechada"), INATIVA("Inativa"),  ATIVA("ativa");
     private String value;
     
     private Situacao( String value ){
