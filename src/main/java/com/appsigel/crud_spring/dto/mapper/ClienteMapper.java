@@ -2,6 +2,7 @@ package com.appsigel.crud_spring.dto.mapper;
 
 import com.appsigel.crud_spring.dto.ClienteDTO;
 import com.appsigel.crud_spring.dto.OrdemDTO;
+import com.appsigel.crud_spring.enums.Situacao;
 import com.appsigel.crud_spring.model.Cliente;
 import com.appsigel.crud_spring.model.Ordem;
 
@@ -38,10 +39,11 @@ public class ClienteMapper {
         cliente.setNome(clienteDTO.nome());
         cliente.setTelefone(clienteDTO.telefone());
 
-        List<Ordem> ordens= clienteDTO.ordens().stream().map(ordemDTO -> {
+        List<Ordem> ordens = clienteDTO.ordens().stream().map(ordemDTO -> {
             var ordem = new Ordem();
+            ordem.setId(ordemDTO.id());
             ordem.setMarca(ordemDTO.marca());
-            ordem.setSituacao(ordem.getSituacao());
+            ordem.setSituacao(ordemDTO.situacao());
             ordem.setCliente(cliente);
             return ordem;
         }).collect(Collectors.toList());

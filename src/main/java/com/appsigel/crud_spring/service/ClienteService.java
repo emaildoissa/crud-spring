@@ -38,11 +38,11 @@ public class ClienteService {
                 .orElseThrow(() -> new RecordNotFoundException(id));          
     }
      
-    public ClienteDTO create(@Valid @RequestBody @NotNull ClienteDTO clienteDTO){
+    public ClienteDTO create(@Valid @NotNull ClienteDTO clienteDTO){
         return clienteMapper.toDTO(clienteRepository.save(clienteMapper.toEntity(clienteDTO)));
     }
      
-    public ClienteDTO update(@NotNull @Positive Long id, @Valid ClienteDTO clienteDTO ){
+    public ClienteDTO update(@NotNull @Positive Long id, @Valid @NotNull ClienteDTO clienteDTO ){
         return clienteRepository.findById(id)
                 .map(recordFound -> {
                     Cliente cliente = clienteMapper.toEntity(clienteDTO);

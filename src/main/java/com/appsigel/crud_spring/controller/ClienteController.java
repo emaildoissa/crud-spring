@@ -54,7 +54,7 @@ public class ClienteController {
     }
     
     @PutMapping("/{id}")
-    public ClienteDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid ClienteDTO clienteDTO ){
+    public ClienteDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull ClienteDTO clienteDTO ){
         return clienteService.update(id, clienteDTO);
                 
     }

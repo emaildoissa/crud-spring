@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.appsigel.crud_spring.enums.Situacao;
 import com.appsigel.crud_spring.enums.converters.SituacaoConverter;
+import com.appsigel.crud_spring.enums.validation.ValueOfEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Column;
@@ -24,9 +25,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@SQLDelete(sql = "UPDATE ORDEM SET SITUACAO = 'Inativa' Where id = ?")
-//@Where(clause = "status = 'Aberta'")
-@SQLRestriction("situacao <> 'ABERTA'")
+//@SQLDelete(sql = "UPDATE ordem SET situacao = 'Fechada' WHERE id = ?")
+
+//@SQLRestriction("situacao <> 'ABERTA'")
 @Table(name = "ordem")
 
 public class Ordem {
@@ -41,7 +42,6 @@ public class Ordem {
     private String marca;
 
     @NotNull
-    
     @Column(length = 10, nullable = false)
     @Convert(converter = SituacaoConverter.class)
     private Situacao situacao = Situacao.ABERTA;
