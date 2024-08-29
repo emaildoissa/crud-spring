@@ -21,13 +21,14 @@ public class CrudSpringApplication {
 	CommandLineRunner initDataBase(ClienteRepository clienteRepository){
 		return args -> {
 			clienteRepository.deleteAll();
-
+			
+			for (int i = 0; i<20; i++){
 			Cliente c = new Cliente();
-			c.setNome("Marcos Felipe Issa");
+			c.setNome("Marcos Felipe Issa" + i);
 			c.setTelefone("(51)993257923");
                         
                         Ordem ordem1 = new Ordem();
-                        ordem1.setMarca("Sony Vaio");
+                        ordem1.setMarca("Sony Vaio" );
                         ordem1.setCliente(c);
                         ordem1.setSituacao(Situacao.ABERTA);
                         c.getOrdens().add(ordem1);
@@ -38,9 +39,9 @@ public class CrudSpringApplication {
                         ordem2.setCliente(c);
                         
                         c.getOrdens().add(ordem2);
-                        
+					
 			clienteRepository.save(c);
-			
+		}
 			
 		};
 	}

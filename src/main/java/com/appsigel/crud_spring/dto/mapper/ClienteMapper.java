@@ -5,22 +5,20 @@ import com.appsigel.crud_spring.dto.OrdemDTO;
 import com.appsigel.crud_spring.enums.Situacao;
 import com.appsigel.crud_spring.model.Cliente;
 import com.appsigel.crud_spring.model.Ordem;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteMapper {
-
+    
     public ClienteDTO toDTO (Cliente cliente){
         if( cliente == null ){
             return null;
         }
         List<OrdemDTO> ordens = cliente.getOrdens()
         .stream()
-        .map(ordem -> new OrdemDTO(ordem.getId(), ordem.getMarca(),ordem.getSituacao()))
+        .map(ordem -> new OrdemDTO( ordem.getId(), ordem.getMarca(), ordem.getSituacao()))
         .collect(Collectors.toList());
 
         return new ClienteDTO(cliente.getId(), cliente.getNome(), cliente.getTelefone(),
@@ -49,5 +47,26 @@ public class ClienteMapper {
         }).collect(Collectors.toList());
         cliente.setOrdens(ordens);
         return cliente;
-    }    
+    } 
+
+    public Situacao convertSituacaoValue( String value ){
+        if ( value == null){
+            return null;
+
+        }
+        return switch( value ){
+            case "Aberta" -> Situacao.ABERTA;
+            case "Fechada" -> Situacao.FECHADA;
+            default -> throw new IllegalArgumentException("Status inválido: " + value );
+        };
+    }
+
+    public Ordem convertOrdemDTOToOrdem(OrdemDTO ordemDTO) {
+        Ordem ordem = new Ordem();
+        ordem.setId(ordemDTO.id());
+        ordem.setMarca(ordemDTO.marca());
+        ordem.setSituacao(ordemDTO.situacao());
+        return ordem;
+        
+    }
 }

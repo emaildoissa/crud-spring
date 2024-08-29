@@ -11,6 +11,6 @@ public record ClienteDTO(
         Long id, 
         @NotBlank @NotNull @Length(min = 3, max = 100) String nome, 
         @NotBlank @NotNull @Length(max = 13) String telefone,
-       // @NotEmpty @NotNull @Valid 
+        //@NotEmpty @NotNull @Valid 
         List<OrdemDTO> ordens){  
 }
